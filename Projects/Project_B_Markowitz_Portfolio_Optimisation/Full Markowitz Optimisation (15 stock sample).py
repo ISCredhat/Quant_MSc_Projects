@@ -3,13 +3,13 @@ import numpy as np
 import random
 import matplotlib.pyplot as plt
 
-tickers = ['AAPL','NVDA','JPM','JNJ','PG','XOM','AMZN','LLY','BRK-B','KO','MCD','V','NKE','GLD','TLT'      ]
+tickers = ['AAPL','NVDA','JPM','JNJ','PG','XOM','AMZN','LLY','BRK-B','KO','MCD','V','NKE','GLD','TLT']
 
 stock_dfs = {}
 
 #maybe not the cleanest way, however it was quick, finding the daily pct change and then appending to the df to find annualised returns
 for ticker in tickers:
-    df_loaded = pd.read_csv(f'5yr Ticker Data/{ticker}.csv')
+    df_loaded = pd.read_csv(f'Project B - Markoqitz Portfolio Optimisation/5yr Ticker Data/{ticker}.csv')
     daily_pc_change = df_loaded['Close'].pct_change()
     df_loaded.insert(2, '% Change', daily_pc_change)
     stock_dfs[ticker] = df_loaded
@@ -20,7 +20,7 @@ for ticker in tickers:
     stock_df = stock_dfs[ticker]
     annualized_returns[ticker] = stock_df['% Change'].mean() * 252
 
-# creating a signle dataframe of daily returns to find covariance matrix
+# creating a single dataframe of daily returns to find covariance matrix
 df_returns = pd.DataFrame()
 for ticker in tickers:
     stock_df = stock_dfs[ticker]
@@ -65,7 +65,7 @@ while loop<50000:
 
     portfolio_return = 0
     for i in range(len(tickers)):
-        portfolio_return += annualized_returns[tickers[i]]*buckets[i]
+        portfolio_return += annualized_returns[tickers[i]]*buckets.iloc[i]
 
 
     #assume a risk-free rate of 5%
