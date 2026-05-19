@@ -1,10 +1,18 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from Quant_Library.Portfolio.MarkowitzOptimiser import MarkowitzOptimiser
+from Data.loaders import load_equity_dict
+import sys
+from pathlib import Path
 
 #yfinance data already stored as CSV, chose NVDA to test with, 5 years of daily data
+project_root = Path(__file__).parent.parent.parent 
+data_dir = project_root / "Data" / "5yr Ticker Data"
+
 ticker = 'NVDA'
-df_loaded = pd.read_csv('NVDA.csv')
+
+df_loaded = load_equity_dict([ticker], data_dir)[ticker]
 
 #S0 = last close price of the dataset
 S0 = df_loaded['Close'].iloc[-1]

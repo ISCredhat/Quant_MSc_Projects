@@ -40,4 +40,8 @@ Z_score = 1.645
 #formula for parametric VaR is = mu - (SD * Z-Score)
 parametric_VaR = average_pct_change - (Z_score * volatility)
 
-print(f'95% of the time, losses on any one day will not exceed {parametric_VaR*100:.2f}%.')
+print(f'95% VaR: {parametric_VaR*100:.2%}')
+
+#Expected Shortfall (ES) is the average loss given that the loss exceeds the VaR threshold
+es_95 = portfolio[portfolio <= parametric_VaR].mean()
+print(f'95% ES: {es_95:.2%}')

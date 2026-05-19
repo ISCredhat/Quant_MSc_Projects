@@ -33,3 +33,7 @@ print(f'95% VaR: {var_95:.2%}')
 var_99 = sorted_portfolio_returns.quantile(0.01)
 print(f'99% VaR: {var_99:.2%}')
 
+# Expected Shortfall (ES) is the average loss given that the loss exceeds the VaR threshold
+es_95 = sorted_portfolio_returns[sorted_portfolio_returns <= var_95].mean()
+print(f'95% ES: {es_95:.2%}')
+
