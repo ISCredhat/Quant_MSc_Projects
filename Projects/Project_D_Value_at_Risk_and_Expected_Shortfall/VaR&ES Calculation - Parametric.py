@@ -15,6 +15,7 @@ tickers = ['AAPL','NVDA','JPM','JNJ','PG','XOM','AMZN','LLY','BRK-B','KO','MCD',
 
 ticker_dfs = load_equity_dict(tickers, data_dir)
 
+#assuming a risk-free-rate of 5% as standard
 optimizer = MarkowitzOptimiser(tickers, ticker_dfs, 0.05)
 
 #Once best weights calculated, can then find the VaR using the historical method over the past 5 years of data
